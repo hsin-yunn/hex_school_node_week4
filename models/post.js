@@ -12,7 +12,6 @@ const schema = new mongoose.Schema(
     },
     content: {
       type: String,
-      required: [true, '內容必填'],
     },
     user: {
       type: mongoose.Schema.ObjectId,
@@ -30,7 +29,7 @@ const schema = new mongoose.Schema(
     ],
   },
   {
-    _versionKey: false,
+    versionKey: false,
   },
 );
 

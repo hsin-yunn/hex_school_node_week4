@@ -5,10 +5,12 @@ const schema = new mongoose.Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      select: false,
     },
     updatedAt: {
       type: Date,
       default: Date.now,
+      select: false,
     },
     name: {
       type: String,
@@ -19,6 +21,7 @@ const schema = new mongoose.Schema(
     },
     password: {
       type: String,
+      select: false,
     },
     email: {
       type: String,
@@ -30,7 +33,7 @@ const schema = new mongoose.Schema(
     },
   },
   {
-    _versionKey: false,
+    versionKey: false,
   },
 );
 

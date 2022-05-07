@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 
 //env
 dotenv.config({ path: './config.env' });
-const DB = env.process.DATABASE.replace(
+const DB = process.env.DATABASE.replace(
   '<password>',
   process.env.DATABASE_PASSWORD,
 );
@@ -21,8 +21,9 @@ mongoose
     console.log('connect faild', err);
   });
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var postsRouter = require('./routes/posts');
+var authRouter = require('./routes/auth');
 
 var app = express();
 
@@ -32,7 +33,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
+app.use('/auth', authRouter);
+
+// 404 錯誤
+app.use(function (req, res, next) {
+  res.status(404).json({
+    status: 'error',
+    message: 'page not found',
+  });
+});
 
 module.exports = app;
